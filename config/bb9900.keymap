@@ -34,6 +34,18 @@
         };
     };
 
+    behaviors {
+        // Tap: the key (英数 / かな). Hold with another key: the modifier.
+        // "balanced" keeps fast typing rolls as taps.
+        lang_mt: lang_mod_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
     macros {
         // Hold to scroll: taps Caps Lock on press and again on release.
         // The trackpad scrolls while the host reports Caps Lock on.
@@ -55,12 +67,12 @@
 
         default_layer {
             bindings = <
-&scroll_hold    &mkp RCLK
+&scroll_hold    &mo UPPER
 &kp CLCK        &kp LGUI   &mkp LCLK  &mt ESC K_BACK  &kp TAB
 &kp Q           &kp W      &kp E      &kp R           &kp T             &kp Y        &kp U     &kp I      &kp O     &kp P
 &kp A           &kp S      &kp D      &kp F           &kp G             &kp H        &kp J     &kp K      &kp L     &kp BSPC
 &kp LEFT_SHIFT  &kp Z      &kp X      &kp C           &kp V             &kp B        &kp N     &kp M      &kp SEMI  &kp ENTER
-                           &mo 1                      &kp LEFT_CONTROL  &kp SPACE    &kp RALT  &mo UPPER
+                           &mo SYM                    &lang_mt LGUI LANG2  &kp SPACE    &lang_mt RALT LANG1  &mo SYM
             >;
         };
 
